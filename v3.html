@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy Bot - PDD Analysis Result</title>
+  <link href="chatbot.css" rel="stylesheet">
+  <style>
+    .chat-container {
+      text-align: center;
+    }
+    #recommendation-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #f81ac8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #recommendation-btn:hover {
+      background-color: #fa14c4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Therapy Bot</h1>
+      <nav>
+        <ul>
+          <li><a href="homeeeee.html">Home</a></li>
+          <li><a href="homeeeee.html">About</a></li>
+          <li><a href="homeeeee.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="chat-container">
+    <h2>Your PDD Analysis Result</h2>
+    <p id="result-text">Loading...</p>
+    <div id="video-container" style="display: none;">
+      <h3>Recommended Video:</h3>
+      <div id="yt-video"></div>
+    </div>
+    <button id="recommendation-btn">See Personalized Recommendations</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const score = parseInt(localStorage.getItem("ocdScore")) || 0;
+      const resultText = document.getElementById("result-text");
+      const videoContainer = document.getElementById("video-container");
+      const ytVideo = document.getElementById("yt-video");
+      const recommendationBtn = document.getElementById("recommendation-btn");
+      
+      let videoEmbed = "";
+      let redirectUrl = "";
+
+      if (score >= 48) {
+        resultText.textContent = "Severe PDD symptoms detected. Consider professional help.";
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/QDk5sGApdkU?si=98on5e-sETviMwzq" frameborder="0" allowfullscreen></iframe>`;
+        redirectUrl = "r3_pdd.html";
+      } else if (score >= 24) {
+        resultText.textContent = "Moderate PDD symptoms detected. Here are some self-help strategies.";
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/chjqcYMnW98?si=Tc6RXagGgT406XeY" frameborder="0" allowfullscreen></iframe>`;
+        redirectUrl = "r2_pdd.html";
+      } else {
+        resultText.textContent = "Mild or no PDD symptoms detected. Maintain a healthy mindset.";
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/eWN1yBfVjrE?si=SfNMgvsO8f7vjpDM" frameborder="0" allowfullscreen></iframe>`;
+        redirectUrl = "r1_pdd.html";
+      }
+
+      if (videoEmbed) {
+        videoContainer.style.display = "block";
+        ytVideo.innerHTML = videoEmbed;
+        recommendationBtn.style.display = "inline-block";
+      }
+
+      recommendationBtn.addEventListener("click", function () {
+        window.location.href = redirectUrl;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAD Analysis</title>
+    <link rel="stylesheet" href="adv_ocd.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Social Anxiety Disorder (SAD) Analysis</h1>
+            <p>Answer these questions honestly. Therabot is here to support you.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <!-- Rating-based questions -->
+                <div class="question">
+                    <label for="q1">1. How often do you feel anxious in social situations?</label>
+                    <div class="star-rating" data-question="q1">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <label for="q2">2. How often do you avoid social interactions due to fear of embarrassment?</label>
+                    <div class="star-rating" data-question="q2">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <label for="q3">3. How uncomfortable do you feel when meeting new people?</label>
+                    <div class="star-rating" data-question="q3">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <label for="q4">4. How often do you replay social interactions in your mind, worrying about what you said?</label>
+                    <div class="star-rating" data-question="q4">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+
+                <!-- Single-choice questions -->
+                <div class="question">
+                    <label for="q5">5. Do you often worry about being judged by others?</label>
+                    <select id="q5" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <label for="q6">6. How often do you experience physical symptoms like sweating or trembling in social settings?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <label for="q7">7. Do you avoid making phone calls due to anxiety?</label>
+                    <select id="q7" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <label for="q8">8. How uncomfortable do you feel when speaking in front of a group?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very uncomfortable</option>
+                        <option value="3">Somewhat uncomfortable</option>
+                        <option value="2">Rarely uncomfortable</option>
+                        <option value="1">Not uncomfortable</option>
+                    </select>
+                </div>
+
+                <!-- Multi-choice questions -->
+                <div class="question">
+                    <label>9. Which of these symptoms do you often experience in social situations? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Rapid heartbeat</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Dry mouth</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Nausea</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Dizziness</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>10. How has social anxiety affected your daily life? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Avoiding social gatherings</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Difficulty speaking in public</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Trouble making eye contact</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Isolation from friends or family</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>11. What situations make you feel most anxious? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Speaking up in meetings</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Starting conversations</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Attending social events</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Being watched while working</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>12. What coping strategies do you use to manage your anxiety? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Avoiding situations</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Breathing exercises</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Seeking reassurance</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Preparing conversations in advance</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>13. How do you feel after social interactions? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Exhausted</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Relieved</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Overanalyzing</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Content</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+    <script src ="adv_sad7.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTSD Analysis</title>
+    <link rel="stylesheet" href="adv_ocd.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced PTSD Analysis</h1>
+            <p> Don't worry, Therabot is here to support you—just take your time and answer the questions accurately.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <div class="question">
+                    <label for="q1">1. Over the past month, how often have you experienced intrusive memories or flashbacks related to the traumatic event(s), where you feel as though you are re-living the experience?</label>
+                    <div class="star-rating" data-question="q1">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q2">2. When you are reminded of the traumatic event, how intense are your emotional reactions? This could include feelings of fear, anxiety, panic, or anger.</label>
+                    <div class="star-rating" data-question="q2">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q3">3. How often do you try to avoid thoughts, conversations, or situations that remind you of the traumatic event? Does it affect your ability to engage in everyday activities?</label>
+                    <div class="star-rating" data-question="q3">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q4">4. How frequently do you experience distressing nightmares or vivid dreams that bring the traumatic event back into your consciousness while you’re sleeping?</label>
+                    <div class="star-rating" data-question="q4">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q5">5. Do you often feel emotionally numb, detached, or disconnected from others? This could include feeling distant from family and friends or feeling like you’re "shutting down" emotionally.</label>
+                    <div class="star-rating" data-question="q5">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <!-- Choice-Based Questions -->
+                <div class="question">
+                    <label for="q6">6. When you’re reminded of the traumatic event, how do you typically react emotionally or physically? This could include anxiety, fear, a sense of panic, or a feeling of being out of control.</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I become extremely anxious or panicked, feeling overwhelmed and unable to calm down.</option>
+                        <option value="3">I experience intense fear or a sense of danger, as though something bad is going to happen.</option>
+                        <option value="2">I feel emotionally numb, detached, or distant, as if I’m not fully experiencing what’s happening.</option>
+                        <option value="1">I feel like I cannot react, shutting down emotionally and physically as a way to cope.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q7">7. How often do you intentionally avoid situations, people, or conversations that remind you of the trauma, even if they are part of daily life?</label>
+                    <select id="q7" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I rarely avoid reminders and feel I can handle situations that bring up the trauma.</option>
+                        <option value="3">I sometimes avoid certain reminders but can still face them when necessary.</option>
+                        <option value="2">I often find myself avoiding reminders because they cause intense distress or fear.</option>
+                        <option value="1">I actively avoid all reminders of the trauma and feel overwhelmed by the thought of encountering them.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q8">8. Do you experience symptoms of hyperarousal, such as being easily startled, feeling tense, having difficulty relaxing, or being "on edge" in situations that are supposed to be calm or safe?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I rarely experience these symptoms and feel generally calm in most situations.</option>
+                        <option value="3">I experience these symptoms occasionally, but they don’t affect my ability to relax too much.</option>
+                        <option value="2">I frequently feel tense, easily startled, or on edge, making it difficult to relax.</option>
+                        <option value="1">These symptoms are constant, and I feel tense or hyper-alert even when I’m supposed to be resting or safe.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q9">9. How often do you feel disconnected or detached from those around you, even during social situations or when you are with people who care about you? Does this make it difficult for you to connect or trust others?</label>
+                    <select id="q9" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I feel connected and engaged with others, even though I might occasionally feel distant.</option>
+                        <option value="3">I sometimes feel disconnected, but I’m still able to engage with others when needed.</option>
+                        <option value="2">I often feel detached or distant from others, which makes it difficult to interact socially.</option>
+                        <option value="1">I feel completely disconnected, and it’s hard for me to trust or connect with others at all.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q10">10. Do you find it hard to get restful sleep due to recurring thoughts about the trauma, or are you often disturbed by nightmares related to the traumatic event? How does this affect your ability to function during the day?</label>
+                    <select id="q10" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I sleep well and rarely have difficulty falling asleep or staying asleep.</option>
+                        <option value="3">I sometimes struggle with sleep, but it’s manageable and doesn’t impact my daily routine too much.</option>
+                        <option value="2">I frequently have nightmares or disturbed sleep, which leaves me feeling exhausted during the day.</option>
+                        <option value="1">I have significant trouble sleeping due to trauma-related thoughts and nightmares, which severely affects my well-being.</option>
+                    </select>
+                </div>
+        
+                <!-- Checkbox-Based Questions -->
+                <div class="question">
+                    <label>11. Which aspects of your life have been most significantly affected by your PTSD symptoms? (Check all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> My work or career, where I find it difficult to focus or engage in tasks.</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> My personal relationships with family, friends, or loved ones, due to emotional distance or difficulty connecting.</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> My social interactions, as I often avoid social events or feel disconnected in social settings.</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> My daily life, including personal care, hobbies, or routine tasks, which can feel overwhelming or draining.</label>
+                    </div>
+                </div>
+        
+                <div class="question">
+                    <label>12. Which methods or treatments have you used to cope with your PTSD symptoms, and how effective have they been? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Cognitive Behavioral Therapy (CBT) or other forms of trauma-focused therapy to work through my emotions and reactions.</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Medication prescribed by a doctor, such as antidepressants or anti-anxiety medications, to manage my symptoms.</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Mindfulness practices or relaxation techniques (e.g., yoga, deep breathing, or meditation) to calm my mind and body.</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Support groups or peer support, where I connect with others who have experienced similar trauma.</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+
+    <script src="adv_ocd.js"></script>
+</body>
+</html>

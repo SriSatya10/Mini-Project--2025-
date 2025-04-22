@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Therabot - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .dark-mode {
+            background-color: #2D3436;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-lime-100 via-purple-200 to-pink-200 min-h-screen flex">
+
+    <nav class="w-64 bg-white bg-opacity-80 backdrop-blur-lg shadow-2xl min-h-screen p-6 flex flex-col justify-between">
+        <div>
+            <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-purple-500 to-pink-400 text-center">Therabot</h2>
+            <ul class="mt-8 space-y-4 text-lg font-semibold">
+                <li><button onclick="showContent('about')" class="block w-full text-left p-3 rounded-lg hover:bg-purple-300 transition">About</button></li>
+                <li><button onclick="showContent('features')" class="block w-full text-left p-3 rounded-lg hover:bg-purple-300 transition">Features</button></li>
+                <li><button onclick="showContent('team')" class="block w-full text-left p-3 rounded-lg hover:bg-purple-300 transition">Contact</button></li>
+                <li><button onclick="showContent('profile')" class="block w-full text-left p-3 rounded-lg hover:bg-purple-300 transition">Profile</button></li>
+                <li><a href="chatbot6.html" class="block p-3 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition">Chat</a></li>
+            </ul>
+        </div>
+        <button id="darkModeToggle" class="p-2 bg-gray-500 text-white rounded-lg mt-4" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </nav>
+
+    <div id="mainContent" class="flex-1 flex flex-col p-10 relative">
+        <div class="flex justify-between items-center mb-10">
+            <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-lime-400 via-purple-500 to-pink-400">Welcome to Therabot . . .</h1>
+        </div>
+
+        <div id="content" class="bg-white shadow-xl rounded-2xl p-10 max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6">How Therabot Helps</h2>
+            <img src="image.jpeg" alt="Mental Health Awareness" class="w-1/2 mx-auto rounded-lg shadow-md mb-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-green-200 via-green-100 to-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-700 mb-4">✅ What Therabot Does</h3>
+                    <ul class="text-gray-800 space-y-2">
+                        <li>✔ Emotional Support</li>
+                        <li>✔ Wellness Guidance</li>
+                        <li>✔ Personalized Insights</li>
+                        <li>✔ Privacy First</li>
+                        <li>✔ Always Available</li>
+                        <li>✔ Mood Tracking</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-red-200 via-red-100 to-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-red-700 mb-4">❌ What Therabot Doesn’t Do</h3>
+                    <ul class="text-gray-800 space-y-2">
+                        <li>✖ Replace Therapy</li>
+                        <li>✖ Diagnose Conditions</li>
+                        <li>✖ Prescribe Medication</li>
+                        <li>✖ Handle Emergencies</li>
+                        <li>✖ Share Data</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <a href="chatbot6.html" class="bg-purple-500 text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-purple-600 transition">Start Chat</a>
+            </div>
+        </div>
+
+        <div id="profileSection" class="hidden bg-white mt-10 p-6 rounded-lg shadow-xl max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-4">Welcome, User</h2>
+            <button id="viewChatBtn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">View Chat History</button>
+            <div id="chatHistoryDisplay" class="mt-4 p-4 bg-gray-100 rounded-lg max-h-60 overflow-y-auto text-left border border-gray-300"></div>
+
+            <div id="chatHistoryList" class="mt-6 text-left">
+                <h2 class="text-xl font-semibold mb-2">Your Saved Full Chat Pages</h2>
+                <ul class="list-disc list-inside text-blue-600 underline space-y-1"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function showContent(section) {
+            document.getElementById("profileSection").classList.toggle("hidden", section !== 'profile');
+            document.getElementById("content").classList.toggle("hidden", section === 'profile');
+        }
+
+        document.getElementById("viewChatBtn").addEventListener("click", () => {
+            const userUid = localStorage.getItem('userUid');
+            const display = document.getElementById("chatHistoryDisplay");
+
+            if (!userUid) {
+                display.innerHTML = "Please log in to see chat history.";
+                return;
+            }
+
+            const chatContent = localStorage.getItem(`chatHistory_${userUid}`);
+            const userAnswers = JSON.parse(localStorage.getItem(`user_answers_${userUid}`) || "[]");
+
+            display.innerHTML = chatContent || "<p>No recent chat history found.</p>";
+
+            if (userAnswers.length > 0) {
+                display.innerHTML += "<hr><p>User Answers:</p>";
+                userAnswers.forEach(answer => {
+                    display.innerHTML += `<p>${answer}</p>`;
+                });
+            }
+        });
+
+        // Load full styled chat pages
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPages = JSON.parse(localStorage.getItem("saved_chat_pages") || "[]");
+            const chatHistoryList = document.getElementById("chatHistoryList").querySelector("ul");
+
+            savedPages.forEach((page) => {
+                const listItem = document.createElement("li");
+                const link = document.createElement("a");
+                link.href = page.url;
+                link.textContent = `Chat from ${new Date(page.timestamp || Date.now()).toLocaleString()}`;
+                link.target = "_blank";
+                listItem.appendChild(link);
+                chatHistoryList.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+</html>

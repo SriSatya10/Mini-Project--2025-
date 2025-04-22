@@ -1,0 +1,147 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #e0f2f1, #fce4ec);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container Styles */
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+/* Header Styles */
+header {
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #7b1fa2;
+    background: linear-gradient(to right, #8e24aa, #ff80ab);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #5e35b1;
+}
+
+/* Form and Question Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.question-section {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease-in-out;
+}
+
+.question:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.question label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Styled Select Box */
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #d1c4e9;
+    border-radius: 10px;
+    background: white;
+    font-size: 1rem;
+    color: #5e35b1;
+    cursor: pointer;
+    outline: none;
+    transition: border 0.3s;
+}
+
+select:focus {
+    border: 2px solid #8e24aa;
+}
+
+/* Button Styles */
+.submit-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #7b1fa2, #ff80ab);
+    color: white;
+    font-size: 1.2rem;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Result Section */
+.result-section {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.result-section h2 {
+    font-size: 1.5rem;
+    color: #7b1fa2;
+}
+/* Star Rating Styles */
+.star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 2rem; /* Increased size */
+}
+
+.star {
+    cursor: pointer;
+    color: #40E0D0;; /* Default white stars */
+    transition: color 0.3s ease-in-out, transform 0.2s;
+}
+
+.star:hover,
+.star.active {
+    color: gold; /* Change to gold when hovered or selected */
+    transform: scale(1.2); /* Slight zoom effect */
+}
+

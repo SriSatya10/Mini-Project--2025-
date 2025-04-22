@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy Bot - Interactive Chatbot Interface</title>
+  <link href="chatbot.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div>
+      <h1>Therapy Bot</h1>
+      <nav>
+        <ul>
+          <li><a href="home14.html">Home</a></li>
+          <li><a href="home14.html">About</a></li>
+          <li><a href="home14.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Chat Section -->
+  <main>
+    <div class="chat-container">
+      <div class="chat-body" id="chatBox" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto;">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div class="chat-footer" style="margin-top: 10px;">
+        <textarea id="response" rows="1" placeholder="Type your answer here (Yes/No + Explanation)..." style="width: 80%;"></textarea>
+        <button id="nextBtn" style="padding: 6px 10px;">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer style="margin-top: 20px;">
+    <p>&copy; 2025 Therapy Bot. All rights reserved.</p>
+  </footer>
+
+  <!-- Link external chat.js -->
+  <script src="chat2.js"></script>
+
+  <!-- Inline script for chat handling -->
+  <script>
+    function saveChatToLocalStorage() {
+      const chatBox = document.getElementById('chatBox');
+      const chatContent = chatBox.innerHTML;
+      localStorage.setItem('therabot_chat_history', chatContent);
+    }
+
+    function addMessage(message, sender = 'user') {
+      const chatBox = document.getElementById('chatBox');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = sender === 'user' ? 'text-right text-blue-600' : 'text-left text-gray-700';
+      messageDiv.textContent = message;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      saveChatToLocalStorage();
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', function () {
+      const input = document.getElementById('response');
+      const text = input.value.trim();
+      if (text !== "") {
+        addMessage(text, 'user');
+        input.value = "";
+        // Simulate bot response
+        setTimeout(() => {
+          addMessage("Thanks for sharing!", 'bot');
+        }, 600);
+      }
+    });
+
+    // Load previous chat history
+    window.onload = function () {
+      const savedChat = localStorage.getItem('therabot_chat_history');
+      if (savedChat) {
+        document.getElementById('chatBox').innerHTML = savedChat;
+      }
+    };
+  </script>
+
+</body>
+</html>

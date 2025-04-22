@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PTSD Analysis</title>
+    <link rel="stylesheet" href="adv_ocd.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced PTSD Analysis</h1>
+            <p> Don't worry, Therabot is here to support you—just take your time and answer the questions accurately.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <!-- Rating-based questions -->
+                <div class="question">
+                    <label for="q1">1. How often have you felt overwhelmed by memories of the traumatic event in the past month?</label>
+                    <div class="star-rating" data-question="q1">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <label for="q2">2. How severe has your emotional distress been when reminded of the traumatic event?</label>
+                    <div class="star-rating" data-question="q2">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <label for="q3">3. How frequently do you avoid people, places, or activities that remind you of the trauma?</label>
+                    <div class="star-rating" data-question="q3">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                <div class="question">
+                    <label for="q4">4. How often do you experience difficulty concentrating due to trauma-related thoughts?</label>
+                    <div class="star-rating" data-question="q4">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+
+                <!-- Single-choice questions -->
+                <div class="question">
+                    <label for="q5">5. How do you typically react when faced with trauma reminders?</label>
+                    <select id="q5" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Extreme anxiety or panic</option>
+                        <option value="3">Intense emotional discomfort</option>
+                        <option value="2">Mild unease or worry</option>
+                        <option value="1">No significant reaction</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <label for="q6">6. How often do you avoid social situations due to trauma-related fears?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very frequently</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <label for="q7">7. Do you experience physical symptoms like sweating, trembling, or a racing heart when reminded of the trauma?</label>
+                    <select id="q7" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very frequently</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+                <div class="question">
+                    <label for="q8">8. How often do you feel detached or disconnected from those around you?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very frequently</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+
+                <!-- Multi-choice questions -->
+                <div class="question">
+                    <label>9. Which of the following symptoms have significantly affected your daily life? (Check all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Difficulty sleeping</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Trouble concentrating</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Irritability or mood swings</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Social withdrawal</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>10. Which coping mechanisms have you tried to manage PTSD symptoms? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Therapy or counseling</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Medication</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Meditation or mindfulness</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Support groups</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>11. What physical symptoms do you experience most often? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Headaches</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Fatigue</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Rapid heartbeat</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Stomach issues</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>12. How have your eating habits changed recently? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Loss of appetite</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Overeating</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Irregular meal times</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> No significant change</label>
+                    </div>
+                </div>
+                <div class="question">
+                    <label>13. What kinds of nightmares do you experience related to the traumatic event? (Select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Reliving the event</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Symbolic nightmares</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> General fear and anxiety</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Nightmares unrelated to trauma</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+   
+    <script src="adv_ptsd7.js"></script> 
+</body>
+</html>

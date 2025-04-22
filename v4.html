@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy Bot - PTSD Analysis Result</title>
+  <link href="chatbot.css" rel="stylesheet">
+  <style>
+    .chat-container {
+      text-align: center;
+    }
+    #recommendation-btn {
+      display: none;
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #f81ac8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #recommendation-btn:hover {
+      background-color: #fa14c4;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Therapy Bot</h1>
+      <nav>
+        <ul>
+          <li><a href="homeeeee.html">Home</a></li>
+          <li><a href="homeeeee.html">About</a></li>
+          <li><a href="homeeeee.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="chat-container">
+    <h2>Your PTSD Analysis Result</h2>
+    <p id="result-text">Loading...</p>
+    <div id="video-container" style="display: none;">
+      <h3>Recommended Video:</h3>
+      <div id="yt-video"></div>
+    </div>
+    <button id="recommendation-btn">See Personalized Recommendations</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const score = parseInt(localStorage.getItem("ocdScore")) || 0;
+      const resultText = document.getElementById("result-text");
+      const videoContainer = document.getElementById("video-container");
+      const ytVideo = document.getElementById("yt-video");
+      const recommendationBtn = document.getElementById("recommendation-btn");
+      
+      let videoEmbed = "";
+      let redirectUrl = "";
+
+      if (score >= 48) {
+        resultText.textContent = "Severe PTSD symptoms detected. Consider professional help.";
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/LgrHnrg4Ldg?si=c9VMnJW-3XjWKmN-" frameborder="0" allowfullscreen></iframe>`;
+        redirectUrl = "r3_ptsd.html";
+      } else if (score >= 24) {
+        resultText.textContent = "Moderate PTSD symptoms detected. Here are some self-help strategies.";
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/IkAZ5A6188s?si=w2gL6kp6abCaqVx3" frameborder="0" allowfullscreen></iframe>`;
+        redirectUrl = "r2_ptsd.html";
+      } else {
+        resultText.textContent = "Mild or no PTSD symptoms detected. Maintain a healthy mindset.";
+        videoEmbed = `<iframe width="560" height="315" src="https://www.youtube.com/embed/H8cZiIq3yXw?si=Ioe3mFqNgfibTlrj" frameborder="0" allowfullscreen></iframe>`;
+        redirectUrl = "r1_ptsd.html";
+      }
+
+      if (videoEmbed) {
+        videoContainer.style.display = "block";
+        ytVideo.innerHTML = videoEmbed;
+        recommendationBtn.style.display = "inline-block";
+      }
+
+      recommendationBtn.addEventListener("click", function () {
+        window.location.href = redirectUrl;
+      });
+    });
+  </script>
+</body>
+</html>

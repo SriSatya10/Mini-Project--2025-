@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - TheraBot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="register3.js" defer></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-md p-8 bg-white rounded-2xl shadow-xl">
+    <!-- Logo -->
+    <div class="text-center mb-6">
+      <h1 class="text-3xl font-bold text-gray-800">
+        Welcome to <span class="text-pink-500">TheraBot</span>
+      </h1>
+      <p class="text-gray-500 mt-2">Your personalized mental health ally</p>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="space-y-5">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="text" id="email" name="email" required
+          class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-900 sm:text-sm"
+          placeholder="Enter your email" />
+      </div>
+
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="password" name="password" required
+          class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-900 sm:text-sm"
+          placeholder="Enter your password" />
+      </div>
+
+      <div class="flex items-center justify-between text-sm">
+        <div class="flex items-center">
+          <input type="checkbox" id="remember" class="h-4 w-4 text-pink-500 focus:ring-pink-500 border-gray-300 rounded">
+          <label for="remember" class="ml-2 text-gray-600">Remember me</label>
+        </div>
+        <a href="#" class="text-pink-500 hover:underline">Forgot password?</a>
+      </div>
+
+      <div>
+        <button type="submit" id="submit"
+          class="w-full bg-pink-500 text-white font-medium py-3 px-4 rounded-lg shadow-lg hover:bg-pink-600 focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 transition">
+          Sign In
+        </button>
+      </div>
+    </form>
+
+    <!-- Create Account Toggle -->
+    <p class="text-center text-gray-600 text-sm mt-4">
+      Don't have an account?
+      <button id="toggle-signup" class="text-pink-500 font-medium hover:underline">Create one</button>
+    </p>
+
+    <!-- Sign Up Form (Hidden Initially) -->
+    <form id="signup-form" class="space-y-5 mt-6 hidden">
+      <h2 class="text-lg font-semibold text-gray-800 text-center">Create an Account</h2>
+      <div>
+        <label for="signup-email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="text" id="signup-email" required
+          class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-900 sm:text-sm"
+          placeholder="Enter your email" />
+      </div>
+
+      <div>
+        <label for="signup-password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="signup-password" required
+          class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-900 sm:text-sm"
+          placeholder="Create a password" />
+      </div>
+
+      <div>
+        <button type="submit" id="create-account"
+          class="w-full bg-green-500 text-white font-medium py-3 px-4 rounded-lg shadow-lg hover:bg-green-600 focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition">
+          Create Account
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

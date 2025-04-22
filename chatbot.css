@@ -1,0 +1,130 @@
+/* Global styles */
+body {
+    font-family: 'Orbitron', sans-serif;
+    background-color: #0d0221;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Allow natural scrolling */
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Chatbot container */
+.chat-container {
+    width: 50vw;
+    max-width: 800px;
+    background: rgba(29, 2, 58, 0.9);
+    border: 2px solid #ff00ff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px #ff00ff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    margin-top: 50px;
+}
+
+/* Chat body - Expand dynamically */
+.chat-body {
+    max-height: 500px; /* Set a max-height to keep a controlled scroll */
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(15, 1, 40, 0.9);
+    border-radius: 10px;
+}
+
+/* Chat messages styling */
+.bot-message, .user-message {
+    margin: 10px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    width: fit-content;
+    max-width: 80%;
+}
+
+.bot-message {
+    background-color: #aa00ff;
+    color: white;
+    text-align: left;
+}
+
+.user-message {
+    background-color: #00eaff;
+    color: black;
+    text-align: right;
+    margin-left: auto;
+}
+
+/* Chat input area - Stick at bottom */
+.chat-footer {
+    position: sticky;
+    bottom: 0;
+    background: rgba(13, 2, 33, 0.9);
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+textarea {
+    flex: 1;
+    padding: 8px;
+    background: #222;
+    color: white;
+    border: 2px solid #ff00ff;
+    border-radius: 8px;
+    resize: none;
+}
+
+/* Send button */
+#nextBtn {
+    background: #ff00ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+#nextBtn:hover {
+    background: #d400d4;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Navigation alignment */
+nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ff00ff;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #00eaff;
+}

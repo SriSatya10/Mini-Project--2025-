@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCD Analysis</title>
+    <link rel="stylesheet" href="adv_ocd.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced OCD Analysis</h1>
+            <p> Don't worry, Therabot is here to support you—just take your time and answer the questions accurately.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <!-- Rating-Based Questions -->
+                <div class="question">
+                    <label for="q1">1. How frequently do you experience obsessive thoughts that disrupt your daily life?</label>
+                    <div class="star-rating" data-question="q1">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label for="q2">2. How much distress do these thoughts cause you?</label>
+                    <div class="star-rating" data-question="q2">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label for="q3">3. How often do you engage in compulsive behaviors to reduce anxiety?</label>
+                    <div class="star-rating" data-question="q3">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label for="q4">4. How severe is the interference of these behaviors in your daily activities?</label>
+                    <div class="star-rating" data-question="q4">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+
+                <!-- Single Choice Questions -->
+                <div class="question">
+                    <label for="q5">5. How do you manage your compulsive urges?</label>
+                    <select id="q5" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I try to distract myself with other activities.</option>
+                        <option value="3">I give in to the urge despite knowing it's unnecessary.</option>
+                        <option value="2">I reach out for support to manage anxiety.</option>
+                        <option value="1">I attempt to resist but usually give in.</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label for="q6">6. How often do specific triggers provoke your compulsive behaviors?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Very often</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Rarely</option>
+                        <option value="1">Never</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label for="q7">7. How do you respond emotionally when resisting compulsions?</label>
+                    <select id="q7" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Intense anxiety and distress</option>
+                        <option value="3">Significant discomfort</option>
+                        <option value="2">Mild discomfort</option>
+                        <option value="1">Minimal distress</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label for="q8">8. How do you typically handle intrusive thoughts?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Engage and analyze them</option>
+                        <option value="3">Try to suppress them</option>
+                        <option value="2">Ignore with some difficulty</option>
+                        <option value="1">Easily ignore them</option>
+                    </select>
+                </div>
+
+                <!-- Multi-Choice Questions -->
+                <div class="question">
+                    <label>9. Which areas of your life have been most affected by OCD?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Work and career</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Personal relationships</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Daily activities</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Social life</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>10. Which coping methods have you used to manage OCD?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Cognitive-behavioral therapy</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Medication</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Mindfulness techniques</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Self-help resources</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>11. What triggers your obsessive thoughts most often?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Stressful situations</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Social interactions</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Routine changes</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Fatigue</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>12. Which emotional responses do you experience due to your symptoms?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Anxiety</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Frustration</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Sadness</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Irritability</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>13. Which physical symptoms accompany your anxiety related to your symptoms?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Rapid heartbeat</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Sweating</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Muscle tension</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Fatigue</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
+        </form>
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+    
+    <script src="adv_ocd7.js"></script>
+</body>
+</html>

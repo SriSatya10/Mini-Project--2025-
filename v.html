@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy Bot - OCD Analysis Result</title>
+  <link href="chatbot.css" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Therapy Bot</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <div class="chat-container">
+    <h2>Your OCD Analysis Result</h2>
+    <p id="result-text">Loading...</p>
+    <div id="video-container" style="display: none;">
+      <h3>Recommended Video:</h3>
+      <iframe id="yt-video" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Function to get query parameter from URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Get score from URL (assuming adv_ocd.html redirects with ?score=VALUE)
+    const score = parseInt(getQueryParam('score')) || 0;
+    const resultText = document.getElementById("result-text");
+    const videoContainer = document.getElementById("video-container");
+    const ytVideo = document.getElementById("yt-video");
+    
+    let videoUrl = "";
+    if (score >= 48) {
+      resultText.textContent = "Severe OCD symptoms detected. Consider professional help.";
+      videoUrl = "https://www.youtube.com/embed/SEVJ0V0JH9M"; // Replace with a suitable video
+    } else if (score >= 24) {
+      resultText.textContent = "Moderate OCD symptoms detected. Here are some self-help strategies.";
+      videoUrl = "https://www.youtube.com/embed/XbUftc8-zxY"; // Replace with a suitable video
+    } else {
+      resultText.textContent = "Mild or no OCD symptoms detected. Maintain a healthy mindset.";
+      videoUrl = "https://www.youtube.com/embed/4EaMJOo1jks"; // Replace with a suitable video
+    }
+    
+    if (videoUrl) {
+      videoContainer.style.display = "block";
+      ytVideo.src = videoUrl;
+    }
+  </script>
+</body>
+</html>   

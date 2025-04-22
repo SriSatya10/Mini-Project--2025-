@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAD Analysis</title>
+    <link rel="stylesheet" href="adv_ocd.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced Analysis</h1>
+            <p> Don't worry, Therabot is here to support you—just take your time and answer the questions accurately.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <div class="question">
+                    <label for="q1">1. In situations such as job interviews or presentations, do you find yourself preemptively imagining worst-case scenarios or overly focusing on potential negative outcomes, even when you have no reason to believe these fears will materialize? How does this affect your overall performance and mental state before, during, and after the event?</label>
+                    <div class="star-rating" data-question="q1">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q5">2. When experiencing social anxiety, do you often encounter physical sensations like sweating, blushing, or feeling nauseous? How do these symptoms influence your interactions with others, and what coping mechanisms have you adopted to manage them in real-time?</label>
+                    <div class="star-rating" data-question="q5">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q9">3. How strongly does the feeling of being rejected, even if it's subtle or imagined, impact your emotional state? Do you find yourself experiencing depressive thoughts, isolation, or frustration as a result of these perceptions, and how do these feelings linger over time?</label>
+                    <div class="star-rating" data-question="q9">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q12">4. Do you frequently avoid starting conversations or reaching out to others, fearing that you might say something wrong or not be accepted? How does this avoidance influence your social life, and what challenges have you faced in attempting to overcome these barriers?</label>
+                    <div class="star-rating" data-question="q12">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q14">5. Do you often compare yourself to others in social settings, feeling that you are inferior or less capable in comparison? How does this self-criticism affect your motivation to engage socially or pursue personal growth opportunities, and what effect does it have on your long-term emotional well-being?</label>
+                    <div class="star-rating" data-question="q14">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+        
+                <!-- Choice-Based Questions -->
+                <div class="question">
+                    <label for="q2">6. Has your social anxiety led to difficulties in maintaining close relationships or friendships? Do you notice a pattern of distancing yourself from people, or have you noticed that anxiety prevents you from connecting at a deeper level with others? How do you cope with these relationship challenges, and what role does anxiety play in these patterns?</label>
+                    <select id="q2" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="1">No, I have not noticed any difficulties.</option>
+                        <option value="2">Yes, I experience some difficulty occasionally.</option>
+                        <option value="3">Yes, I often struggle to maintain close relationships.</option>
+                        <option value="4">Yes, I frequently distance myself and struggle to connect with others.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q3">7.How do you cope with social situations that trigger anxiety?</label>
+                    <select id="q3" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I avoid them altogether.</option>
+                        <option value="3">I try to manage my anxiety by taking breaks or using relaxation techniques.</option>
+                        <option value="2">I push myself to face the situation, but it feels very challenging.</option>
+                        <option value="1">I embrace the challenge and try to improve my skills through exposure.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q6">8.How often do you feel overwhelmed by the thought of socializing?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="1">Rarely.</option>
+                        <option value="2">Sometimes.</option>
+                        <option value="3">Often.</option>
+                        <option value="4">Almost always.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q8">9.Do you experience intense anxiety in social interactions, not just from the fear of judgment, but also from the fear of being misunderstood or rejected in subtle ways (e.g., facial expressions, tone of voice)? How do you manage these feelings during social interactions?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="1">I rarely feel this way and have no trouble managing it.</option>
+                        <option value="2">I sometimes feel this way but manage to get through social interactions..</option>
+                        <option value="3">I often feel this way, and it affects my ability to engage in social interactions.</option>
+                        <option value="4">I feel this way most of the time, which makes social interactions extremely difficult..</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q10">10.When thinking about past social situations, do you often engage in excessive self-monitoring or replaying events, questioning how others perceive you, even if there is no clear evidence of negative judgment? How much time do you spend on these thoughts after social interactions?
+                    </label>
+                    <select id="q10" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="1">I rarely engage in this kind of self-monitoring.</option>
+                        <option value="2">I occasionally replay past events but quickly move on.</option>
+                        <option value="3">I often replay events and question how others perceived me</option>
+                        <option value="4">I constantly replay past interactions, often obsessing over my perceived mistakes..</option>
+                    </select>
+                </div>
+        
+                <!-- Checkbox-Based Questions -->
+                <div class="question">
+                    <label>11.Beyond avoiding speaking in front of groups, do you find yourself avoiding certain places, events, or activities altogether (e.g., parties, group gatherings, or even work meetings), and what impact does this avoidance have on your relationships and professional life?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Avoiding group gatherings</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Avoiding work meetings</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Avoiding parties</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1">Avoiding other social activities </label>
+                    </div>
+                </div>
+        
+                <div class="question">
+                    <label>12.In social situations, do you experience physical symptoms such as rapid heartbeat, dizziness, or shaking? How do these symptoms influence your ability to engage in conversations or activities, and have you developed any coping strategies to manage them in real-time?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Rapid heartbeat</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3">Dizziness</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Shaking</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1">Other symptoms </label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+
+    <script src="adv_ocd.js"></script>
+</body>
+</html>

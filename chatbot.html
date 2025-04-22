@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy Bot - Interactive Chatbot Interface</title>
+  <link href="chatbot.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div>
+      <h1>Therapy Bot</h1>
+      <nav>
+        <ul>
+          <li><a href="home14.html">Home</a></li>
+          <li><a href="home14.html">About</a></li>
+          <li><a href="home14.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Chat Section -->
+  <main>
+    <div class="chat-container">
+      <div class="chat-body" id="chatBody">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div class="chat-footer">
+        <textarea id="response" rows="1" placeholder="Type your answer here (Yes/No + Explanation)..."></textarea>
+        <button id="nextBtn">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Therapy Bot. All rights reserved.</p>
+  </footer>
+
+  <script src="chat.js"></script>
+  <!-- Your existing HTML and chat UI -->
+
+<script>
+  function saveChatToLocalStorage() {
+    const chatBox = document.getElementById('chatBox');
+    const chatContent = chatBox.innerHTML;
+    localStorage.setItem('therabot_chat_history', chatContent);
+  }
+
+  // Example: after every new message is added, call this
+  function addMessage(message, sender = 'user') {
+    const chatBox = document.getElementById('chatBox');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = sender === 'user' ? 'text-right text-blue-600' : 'text-left text-gray-700';
+    messageDiv.innerHTML = message;
+    chatBox.appendChild(messageDiv);
+    saveChatToLocalStorage(); // Save every time a message is added
+  }
+</script>
+
+</body>
+</html>

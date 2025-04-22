@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapy Bot - Interactive Chatbot Interface</title>
+  <link href="chatbot.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div>
+      <h1>Therapy Bot</h1>
+      <nav>
+        <ul>
+          <li><a href="home17.html">Home</a></li>
+          <li><a href="home17.html">About</a></li>
+          <li><a href="home17.html">Contact</a></li>
+          <li><button id="saveBtn" style="background:none; border:none; color:white; cursor:pointer;">Save Chat History</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Chat Section -->
+  <main>
+    <div class="chat-container">
+      <div class="chat-body" id="chatBody">
+        <!-- Chat messages will appear here -->
+      </div>
+      <div class="chat-footer">
+        <textarea id="response" rows="1" placeholder="Type your answer here (Yes/No + Explanation)..."></textarea>
+        <button id="nextBtn">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 Therapy Bot. All rights reserved.</p>
+  </footer>
+
+  <script src="chat2.js"></script>
+
+  <script>
+    // Save chat content to localStorage
+    function saveChatToLocalStorage() {
+      const chatBox = document.getElementById('chatBody');
+      const chatContent = chatBox.innerHTML;
+      localStorage.setItem('therabot_chat_history', chatContent);
+    }
+
+    // Add a message and save to localStorage
+    function addMessage(message, sender = 'user') {
+      const chatBox = document.getElementById('chatBody');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = sender === 'user' ? 'text-right text-blue-600' : 'text-left text-gray-700';
+      messageDiv.innerHTML = `<strong>${sender === 'user' ? 'You' : 'Bot'}:</strong> ${message}`;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      saveChatToLocalStorage();
+    }
+
+    // Load previous chat history on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedHistory = localStorage.getItem('therabot_chat_history');
+      if (savedHistory) {
+        document.getElementById('chatBody').innerHTML = savedHistory;
+      }
+    });
+
+    // Handle send button click
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      const input = document.getElementById('response');
+      const message = input.value.trim();
+      if (message !== "") {
+        addMessage(message, 'user');
+        input.value = "";
+        setTimeout(() => {
+          addMessage("Thanks for your response!", 'bot');
+        }, 600);
+      }
+    });
+
+    // Save the full HTML page as a file
+    function downloadCurrentPage() {
+      const doctype = "<!DOCTYPE html>";
+      const html = document.documentElement.outerHTML;
+      const fullHtml = doctype + "\n" + html;
+
+      const blob = new Blob([fullHtml], { type: "text/html" });
+      const now = new Date();
+      const timestamp = now.toISOString().replace(/:/g, "-");
+      const filename = `chat_history_${timestamp}.html`;
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // Save button triggers page download
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      saveChatToLocalStorage();
+      downloadCurrentPage();
+    });
+  </script>
+
+</body>
+</html>

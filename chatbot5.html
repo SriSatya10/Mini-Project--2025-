@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapy Bot - Interactive Chatbot Interface</title>
+    <link href="chatbot.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Therapy Bot</h1>
+            <nav>
+                <ul>
+                    <li><a href="home17.html">Home</a></li>
+                    <li><a href="home17.html">About</a></li>
+                    <li><a href="home17.html">Contact</a></li>
+                    <li><button id="saveBtn" style="background:none; border:none; color:white; cursor:pointer;">Save Chat History</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="chat-container">
+            <div class="chat-body" id="chatBody"></div>
+            <div class="chat-footer">
+                <textarea id="response" rows="1" placeholder="Type your answer here (Yes/No + Explanation)..."></textarea>
+                <button id="nextBtn">Send</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Therapy Bot. All rights reserved.</p>
+    </footer>
+    <script src="chat3.js"></script>
+    <script>
+        document.getElementById("saveBtn").addEventListener("click", function () {
+            const chatBody = document.getElementById("chatBody");
+            if (!chatBody || chatBody.innerHTML.trim() === "") {
+                alert("No chat history to save!");
+                return;
+            }
+            localStorage.setItem("chatHistory", chatBody.innerHTML);
+            alert("Chat history saved to local storage!");
+        });
+        // Removed window.onload function
+    </script>
+</body>
+</html>
