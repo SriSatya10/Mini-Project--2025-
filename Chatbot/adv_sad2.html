@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced SAD Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // JavaScript for live range update and score calculation
+        function updateRangeValue(rangeId, outputId) {
+            const value = document.getElementById(rangeId).value;
+            document.getElementById(outputId).innerText = value;
+        }
+
+        function calculateScore() {
+            let score = 0;
+
+            // Collect range-based scores
+            document.querySelectorAll(".range-input").forEach((range) => {
+                score += parseInt(range.value);
+            });
+
+            // Collect choice-based scores
+            document.querySelectorAll(".choice-input").forEach((select) => {
+                score += parseInt(select.value);
+            });
+
+            // Collect checkbox-based scores (multi-choice)
+            document.querySelectorAll(".checkbox-input:checked").forEach((checkbox) => {
+                score += parseInt(checkbox.value);
+            });
+
+            // Display the result
+            document.getElementById("result").innerText = `Your Total Score: ${score}`;
+            document.getElementById("result-section").style.display = "block";
+            document.getElementById("message").innerText = "No worries, I'm here with you.";
+        }
+    </script>
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Container Styles */
+.container {
+    max-width: 800px;
+    width: 90%;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+/* Header Styles */
+header {
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #ff6b8b;
+}
+
+header p {
+    font-size: 1rem;
+    color: #ff84a3;
+}
+
+/* Form and Question Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question-section {
+    text-align: left;
+}
+
+.question {
+    margin-bottom: 15px;
+    background: #fdf5f9;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease-in-out;
+}
+
+.question:hover {
+    background: #ffe4ec;
+}
+
+.question label {
+    display: block;
+    font-size: 1rem;
+    color: #444444;
+    margin-bottom: 10px;
+}
+
+.range-input {
+    width: 100%;
+}
+
+.choice-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.submit-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b8b, #ff9a9e);
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced SAD Analysis</h1>
+            <p>Please answer the questions below as accurately as possible.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <!-- Rating-Based Questions -->
+                <div class="question">
+                    <label for="q1">1. In situations such as job interviews or presentations, do you find yourself preemptively imagining worst-case scenarios or overly focusing on potential negative outcomes, even when you have no reason to believe these fears will materialize? How does this affect your overall performance and mental state before, during, and after the event?</label>
+                    <input type="range" id="q1" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q1', 'range-output-q1')">
+                    <span id="range-output-q1">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q2">2. When experiencing social anxiety, do you often encounter physical sensations like sweating, blushing, or feeling nauseous? How do these symptoms influence your interactions with others, and what coping mechanisms have you adopted to manage them in real-time?</label>
+                    <input type="range" id="q2" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q2', 'range-output-q2')">
+                    <span id="range-output-q2">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q3">3. How strongly does the feeling of being rejected, even if it's subtle or imagined, impact your emotional state? Do you find yourself experiencing depressive thoughts, isolation, or frustration as a result of these perceptions, and how do these feelings linger over time?</label>
+                    <input type="range" id="q3" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q3', 'range-output-q3')">
+                    <span id="range-output-q3">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q4">4. Do you frequently avoid starting conversations or reaching out to others, fearing that you might say something wrong or not be accepted? How does this avoidance influence your social life, and what challenges have you faced in attempting to overcome these barriers?</label>
+                    <input type="range" id="q4" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q4', 'range-output-q4')">
+                    <span id="range-output-q4">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q5">5. Do you often compare yourself to others in social settings, feeling that you are inferior or less capable in comparison? How does this self-criticism affect your motivation to engage socially or pursue personal growth opportunities, and what effect does it have on your long-term emotional well-being?</label>
+                    <input type="range" id="q5" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q5', 'range-output-q5')">
+                    <span id="range-output-q5">1</span>
+                </div>
+        
+                <!-- Single Choice Questions -->
+                <div class="question">
+                    <label for="q6">6. Has your social anxiety led to difficulties in maintaining close relationships or friendships? Do you notice a pattern of distancing yourself from people, or have you noticed that anxiety prevents you from connecting at a deeper level with others? How do you cope with these relationship challenges, and what role does anxiety play in these patterns?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0">Select an Option</option>
+                        <option value="1">No, I have not noticed any difficulties.</option>
+                        <option value="2">Yes, I experience some difficulty occasionally.</option>
+                        <option value="3">Yes, I often struggle to maintain close relationships.</option>
+                        <option value="4">Yes, I frequently distance myself and struggle to connect with others.</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label for="q7">7. How do you cope with social situations that trigger anxiety?</label>
+                    <select id="q7" class="choice-input">
+                        <option value="0">Select an Option</option>
+                        <option value="1">I try to avoid them altogether.</option>
+                        <option value="2">I manage my anxiety through deep breathing or taking breaks.</option>
+                        <option value="3">I push myself to face the situation, but it remains a challenge.</option>
+                        <option value="4">I embrace the challenge and try to improve by exposing myself to similar situations.</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label for="q8">8. How often do you feel overwhelmed by the thought of socializing?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0">Select an Option</option>
+                        <option value="1">Rarely, socializing is usually comfortable for me.</option>
+                        <option value="2">Sometimes, depending on the context.</option>
+                        <option value="3">Often, I feel anxious before and during social interactions.</option>
+                        <option value="4">Almost always, social situations trigger high levels of anxiety.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q9">9. Do you experience intense anxiety in social interactions, not just from the fear of judgment, but also from the fear of being misunderstood or rejected in subtle ways (e.g., facial expressions, tone of voice)? How do you manage these feelings during social interactions?</label>
+                    <select id="q9" class="choice-input">
+                        <option value="0">Select an Option</option>
+                        <option value="1">I rarely feel this way and manage it well.</option>
+                        <option value="2">I occasionally feel this way but manage to push through.</option>
+                        <option value="3">I often feel misunderstood, and it makes socializing very difficult.</option>
+                        <option value="4">I feel misunderstood in most interactions, which leads to extreme anxiety.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q10">10. When thinking about past social situations, do you often engage in excessive self-monitoring or replaying events, questioning how others perceive you, even if there is no clear evidence of negative judgment? How much time do you spend on these thoughts after social interactions?</label>
+                    <select id="q10" class="choice-input">
+                        <option value="0">Select an Option</option>
+                        <option value="1">I rarely engage in self-monitoring.</option>
+                        <option value="2">I occasionally replay events but do not dwell on them.</option>
+                        <option value="3">I often replay events and question how others perceived me.</option>
+                        <option value="4">I obsess over past interactions, often worrying about how I was perceived.</option>
+                    </select>
+                </div>
+
+                <!-- Multi-Choice Questions -->
+                <div class="question">
+                    <label>11.In social situations, how do you typically feel when you’re surrounded by others, and how does this impact your behavior or emotional state? </label><br>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> I feel a mix of sadness and irritability – When surrounded by others, I can feel a deep sense of sadness, mixed with irritability. I find it hard to enjoy the company of others, and small things tend to frustrate me.</label>
+                        <br>
+                        <label><input type="checkbox" class="checkbox-input" value="3">I feel overwhelmed and exhausted – Social situations leave me feeling drained, even if I haven’t actively participated. I often need to recover afterward due to the emotional exhaustion. </label>
+                        <br>
+                        <label><input type="checkbox" class="checkbox-input" value="2">I feel anxious and self-conscious – I often worry about how others perceive me, leading to heightened self-awareness. This makes me avoid conversations or become tense during interactions.</label>
+                        <br> 
+                        <label><input type="checkbox" class="checkbox-input" value="1">  I feel detached and distant – I tend to isolate myself in social situations, feeling emotionally disconnected even when surrounded by people. This results in me not participating much or avoiding eye contact.</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label>12.How do the long periods of darkness or lack of sunlight during certain times of the year affect your mood and energy levels? </label><br>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4">I become more anxious and irritable – The lack of sunlight causes a rise in my anxiety levels and irritability, making it harder to manage stress or handle normal situations effectively. </label>
+                        <br>
+                        <label><input type="checkbox" class="checkbox-input" value="3">I experience increased feelings of sadness and hopelessness – During the darker months, I often find myself feeling down and disconnected, with a sense of hopelessness that lingers and affects my outlook on life. </label>
+                        <br>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> I feel more sluggish and less motivated – I tend to feel more lethargic during darker months, which makes it harder for me to stay motivated or focus on tasks."</label>
+                        <br>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> I don't notice any change – The lack of sunlight doesn't significantly impact my mood or energy levels. I continue with my usual activities without much difference.</label>
+                    </div>
+                </div>
+            
+
+            <button type="submit" class="submit-btn">Submit</button>
+            <div id="result-section" class="result-section">
+                <h2 id="result">Your Total Score: 0</h2>
+                <p id="message" class="message">High score? No worries! I’ve got you covered for the next steps. 💙</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

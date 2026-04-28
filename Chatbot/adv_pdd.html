@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDD Analysis</title>
+    <link rel="stylesheet" href="adv_ocd.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced Analysis</h1>
+            <p> Don't worry, Therabot is here to support you—just take your time and answer the questions accurately.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <div class="question">
+                    <label for="q1">1. How often do you experience feelings of sadness or hopelessness? How long do these feelings tend to last, and how do they impact your day-to-day functioning?</label>
+                    <div class="star-rating" data-question="q1">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q2">2. Do you frequently feel fatigued or low in energy, even after a full night's rest? How does this exhaustion affect your ability to engage in daily tasks or activities you once enjoyed?</label>
+                    <div class="star-rating" data-question="q2">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q3">3. How often do you struggle with feelings of worthlessness or guilt that seem disproportionate to your situation? How do these thoughts impact your self-esteem and motivation?</label>
+                    <div class="star-rating" data-question="q3">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q4">4. Have you noticed a decrease in your ability to concentrate or make decisions? How does this impact your work, relationships, or other aspects of your life?</label>
+                    <div class="star-rating" data-question="q4">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <label for="q5">5. Do you experience disturbances in your sleep patterns, such as difficulty falling asleep, waking up too early, or oversleeping? How do these disruptions affect your mood and energy levels during the day?</label>
+                    <div class="star-rating" data-question="q5">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                    </div>
+                </div>
+        
+                <!-- Choice-Based Questions -->
+                <div class="question">
+                    <label for="q6">6. How often do you lose interest or pleasure in activities that you once enjoyed (e.g., hobbies, socializing, or work)?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I still enjoy most activities.</option>
+                        <option value="3">I sometimes lose interest but can engage when needed.</option>
+                        <option value="2">I often lose interest in activities.</option>
+                        <option value="1">I rarely enjoy anything anymore.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q7">7. Do you find it difficult to maintain relationships with friends, family, or colleagues due to your mood or lack of energy?</label>
+                    <select id="q7" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">No, I maintain relationships without any problems.</option>
+                        <option value="3">Sometimes, but I manage to keep connections.</option>
+                        <option value="2">I struggle to maintain relationships due to my mood.</option>
+                        <option value="1">Yes, my relationships have significantly suffered.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q8">8. Do you often feel disconnected from your future goals or hopeless about the possibility of improvement in your life?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I have hope for my future.</option>
+                        <option value="3">I feel uncertain but remain hopeful.</option>
+                        <option value="2">I often feel hopeless about the future.</option>
+                        <option value="1">I feel completely disconnected and hopeless about the future.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q9">9. How often do you experience changes in your appetite, such as eating too much or too little?</label>
+                    <select id="q9" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I eat normally, without significant changes.</option>
+                        <option value="3">Occasionally, I experience small changes in appetite.</option>
+                        <option value="2">Often, I experience changes in my appetite.</option>
+                        <option value="1">My appetite fluctuates significantly, and it affects my well-being.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q10">10. Do you often feel emotionally numb or disconnected from your feelings, as though you're going through the motions without really engaging?</label>
+                    <select id="q10" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Rarely</option>
+                        <option value="3">Sometimes</option>
+                        <option value="2">Often</option>
+                        <option value="1">Almost always</option>
+                    </select>
+                </div>
+        
+                <!-- Checkbox-Based Questions -->
+                <div class="question">
+                    <label>11. Do you experience other symptoms that accompany your low mood, such as:</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Physical pain or discomfort (e.g., headaches, muscle pain)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Digestive issues (e.g., stomachaches, constipation)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Increased irritability or frustration</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Increased isolation or withdrawing from others</label>
+                    </div>
+                </div>
+        
+                <div class="question">
+                    <label>12. Do you find yourself engaging in negative self-talk or having persistent, critical thoughts about yourself? How much do these thoughts influence your daily mood and actions?</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Rarely engage in negative self-talk</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Sometimes, but I can manage it</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Often, and it impacts my mood and decisions</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Constantly, and it greatly affects my functioning</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+
+    <script src="adv_ocd.js"></script>
+</body>
+</html>

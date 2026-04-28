@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Chatbot Interface</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+ <link rel="stylesheet" href="style(chatbot3).css">
+  
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      Therapy Bot
+    </div>
+    <div class="chat-body" id="chatBody">
+      <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-footer">
+      <textarea id="response" rows="1" placeholder="Type your answer here (Yes/No + Explanation)..."></textarea>
+      <button id="nextBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const questionCategories = {
+      "SAD (Social Anxiety Disorder)": [
+        "Do you feel comfortable in social interactions most of the time?",
+        "Do you experience mild nervousness in some social situations but can handle it well?",
+        "Do you avoid speaking in front of groups due to fear of embarrassment?",
+        "Do you feel excessive fear or physical symptoms in social situations like sweating or nausea?",
+        "Do you isolate yourself because of overwhelming fear of social situations?"
+      ],
+      "PDD (Persistent Depressive Disorder)": [
+        "Do you generally feel emotionally stable, with no prolonged periods of sadness, low energy, or difficulty functioning in daily life?",
+        "Do you occasionally feel low, sad, or unmotivated for a few days at a time, but these feelings are mild and manageable without disrupting your daily life?",
+        "Do you experience persistent feelings of sadness, hopelessness, or low energy that last for weeks or months, making it hard to stay motivated or enjoy life?",
+        "Do you feel constantly sad, tired, or unmotivated for over two years, and do these feelings significantly interfere with your ability to work, maintain relationships, or care for yourself?",
+        "Are you overwhelmed by persistent feelings of hopelessness, low self-worth, or suicidal thoughts, and do you feel unable to function in daily life without immediate help?"
+      ],
+      "OCD (Obsessive-Compulsive Disorder)": [
+        "Do you ever experience unwanted thoughts or feelings of discomfort, but they don’t bother you much or affect your daily life?",
+        "Do you sometimes feel the need to double-check things (e.g., locks, appliances) or organize items, but it doesn't take much of your time or disrupt your day?",
+        "Do you find yourself spending significant time (e.g., 1-2 hours daily) on repetitive thoughts or behaviors that you feel you can't ignore, even though you know they might be irrational?",
+        "Do your obsessive thoughts or repetitive behaviors cause you severe distress, interfere with work or relationships, and feel uncontrollable most of the time?",
+        "Do you feel completely overwhelmed by your thoughts or behaviors, spending several hours daily performing rituals, and feel unable to function without help?"
+      ],
+      "PTSD (Post-Traumatic Stress Disorder)": [
+        "Have you experienced a traumatic event in the past, but it doesn’t bother you anymore or affect your thoughts, emotions, or daily life?",
+        "Do you sometimes think about or feel reminded of a past traumatic event, but these feelings happen rarely and don’t cause significant distress?",
+        "Do you frequently experience flashbacks, nightmares, or anxiety about a past traumatic event that disrupt your mood or concentration but are still somewhat manageable?",
+        "Do you avoid people, places, or situations related to the trauma, feel constantly on edge, or experience emotional numbness, making it hard to maintain relationships or perform daily tasks?",
+        "Are you completely overwhelmed by memories of the trauma, feeling unable to sleep, experiencing extreme panic or hopelessness, or having thoughts of self-harm?"
+      ]
+    };
+
+    let currentCategoryIndex = 0;
+    let currentQuestionIndex = 0;
+    const categories = Object.keys(questionCategories);
+    const scores = {};
+    const chatBody = document.getElementById("chatBody");
+    const responseField = document.getElementById("response");
+    const nextButton = document.getElementById("nextBtn");
+
+    // Initialize scores for each category
+    categories.forEach(category => scores[category] = 0);
+
+    const displayMessage = (message, type = "bot") => {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message");
+      messageDiv.classList.add(type === "bot" ? "bot-message" : "user-message");
+      messageDiv.textContent = message;
+      chatBody.appendChild(messageDiv);
+      chatBody.scrollTop = chatBody.scrollHeight; // Scroll to bottom
+    };
+
+    const loadNextQuestion = () => {
+      const currentCategory = categories[currentCategoryIndex];
+      const currentQuestions = questionCategories[currentCategory];
+
+      if (currentQuestionIndex < currentQuestions.length) {
+        displayMessage(`Category: ${currentCategory}`, "bot");
+        displayMessage(currentQuestions[currentQuestionIndex], "bot");
+        displayMessage("Please answer in Yes/No + Explanation format.", "bot");
+      } else if (currentCategoryIndex < categories.length - 1) {
+        displayCategorySum(currentCategory);
+        currentCategoryIndex++;
+        currentQuestionIndex = 0;
+        loadNextQuestion();
+      } else {
+        displayCategorySum(currentCategory);
+        displayMessage("Thank you for completing the assessment!", "bot");
+        nextButton.style.display = "none";
+        responseField.style.display = "none";
+      }
+    };
+
+    const displayCategorySum = (category) => {
+      displayMessage(`Your score for ${category}: ${scores[category]} points`, "bot");
+    };
+
+    nextButton.addEventListener("click", () => {
+      const userResponse = responseField.value.trim();
+      if (!userResponse) {
+        alert("Please provide an answer before proceeding.");
+        return;
+      }
+
+      const currentCategory = categories[currentCategoryIndex];
+      const currentQuestions = questionCategories[currentCategory];
+      const currentQuestion = currentQuestions[currentQuestionIndex];
+
+      // Display the user's message
+      displayMessage(userResponse, "user");
+
+      // Update the score if the answer starts with "Yes"
+      if (userResponse.toLowerCase().startsWith("yes")) {
+        scores[currentCategory] += currentQuestionIndex + 1;
+      } else if (userResponse.toLowerCase().startsWith("no") && currentQuestionIndex < 2) {
+        // If the user answers "No" to the first two questions, skip the rest of the category
+        currentQuestionIndex = currentQuestions.length; // Skip all remaining questions in this category
+      }
+
+      // Clear the input field
+      responseField.value = "";
+
+      currentQuestionIndex++;
+      loadNextQuestion();
+    });
+
+    // Add an event listener for the "keydown" event on the textarea
+    responseField.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault(); // Prevent adding a new line
+        nextButton.click(); // Trigger the send button's click event
+      }
+    });
+
+    // Start the chatbot with the first question
+    loadNextQuestion();
+  </script>
+</body>
+</html>

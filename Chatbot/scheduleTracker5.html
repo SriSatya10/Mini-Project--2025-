@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #ffe6f2; padding: 20px; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 15px rgba(0,0,0,0.2); }
+        select, button { padding: 10px; margin: 10px; font-size: 16px; border-radius: 5px; border: none; }
+        .schedule-container { display: flex; justify-content: space-between; }
+        .column { width: 45%; background: #ffcce0; padding: 10px; border-radius: 10px; }
+        .time-slot { display: flex; justify-content: space-between; margin: 5px 0; align-items: center; }
+        select, textarea { width: 70%; }
+        h1, h2 { color: #d63384; }
+        .optimized-container { margin-top: 20px; padding: 15px; background: #ff99c2; border-radius: 10px; text-align: center; max-width: 700px; margin: auto; }
+        .highlight { background: #ff6699; padding: 5px; border-radius: 5px; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>24-Hour Schedule Tracker</h1>
+        <label for="profession">Choose Your Profession:</label>
+        <select id="profession" onchange="generateTimeSlots()">
+            <option value="">Select Profession</option>
+            <option value="doctor">Doctor</option>
+            <option value="engineer">Software Engineer</option>
+            <option value="artist">Artist</option>
+            <option value="entrepreneur">Entrepreneur</option>
+            <option value="teacher">Teacher</option>
+            <option value="lawyer">Lawyer</option>
+            <option value="athlete">Athlete</option>
+            <option value="scientist">Scientist</option>
+            <option value="government">Government Employee</option>
+            <option value="freelancer">Freelancer</option>
+            <option value="student">Student</option>
+        </select>
+        
+        <div class="schedule-container">
+            <div class="column" id="schedule-am">
+                <h2>AM Schedule</h2>
+            </div>
+            <div class="column" id="schedule-pm">
+                <h2>PM Schedule</h2>
+            </div>
+        </div>
+        <button onclick="collectSchedule()">Submit Schedule</button>
+        
+        <h2>Optimized Schedule</h2>
+        <div id="optimized-schedule" class="optimized-container"></div>
+    </div>
+
+    <script>
+        function generateTimeSlots() {
+            let amColumn = document.getElementById("schedule-am");
+            let pmColumn = document.getElementById("schedule-pm");
+            amColumn.innerHTML = "<h2>AM Schedule</h2>";
+            pmColumn.innerHTML = "<h2>PM Schedule</h2>";
+            
+            for (let hour = 0; hour < 24; hour++) {
+                let timeLabel = hour < 12 ? `${hour}:00 AM` : `${hour === 12 ? 12 : hour - 12}:00 PM`;
+                let slotDiv = document.createElement("div");
+                slotDiv.className = "time-slot";
+                let options = getOptionsForProfession();
+                slotDiv.innerHTML = `<span>${timeLabel}</span> <select id="hour-${hour}">${options}</select>`;
+                if (hour < 12) {
+                    amColumn.appendChild(slotDiv);
+                } else {
+                    pmColumn.appendChild(slotDiv);
+                }
+            }
+        }
+
+        function getOptionsForProfession() {
+            let profession = document.getElementById("profession").value;
+            const options = {
+                doctor: ["Diagnosing Patients", "Conducting Medical Procedures", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed", "Medical Research"],
+                engineer: ["Coding Tasks", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed", "Meetings", "Learning New Tech"],
+                artist: ["Creating Artwork", "Exploring New Styles", "Showcasing Work", "Engaging with Clients", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                entrepreneur: ["Identifying Opportunities", "Managing Operations", "Marketing Strategies", "Business Meetings", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                teacher: ["Lesson Planning", "Teaching Classes", "Grading Assignments", "Researching New Methods", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                lawyer: ["Case Research", "Client Consultation", "Drafting Legal Documents", "Court Representation", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                athlete: ["Training", "Diet & Recovery", "Watching Game Footage", "Public Appearances", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                scientist: ["Conducting Experiments", "Writing Research Papers", "Collaborating with Peers", "Analyzing Data", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                government: ["Policy Implementation", "Administrative Work", "Public Services", "Regulatory Compliance", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                freelancer: ["Finding Clients", "Delivering Projects", "Managing Finances", "Skill Improvement", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"],
+                student: ["Build Projects /Self care/ Learn Advanced Topics  ", "Studying & Completing Assignments", "Managing Time & Priorities", "Building Skills & Networking", "Staying Healthy & Managing Stress", "Sleep", "Had a Meal", "Family time", "Spent on my Hobbies", "Just Relaxed"]
+            };
+            let choices = options[profession] || ["General Work", "Exercise", "Relaxation", "Errands"];
+            return choices.map(choice => `<option value="${choice}">${choice}</option>`).join("");
+        }
+
+        function collectSchedule() {
+            let schedule = [];
+            for (let hour = 0; hour < 24; hour++) {
+                let activity = document.getElementById(`hour-${hour}`).value || "Free Time";
+                schedule.push({ hour, activity });
+            }
+            let optimized = optimizeSchedule(schedule);
+            displayOptimizedSchedule(optimized);
+        }
+
+        function optimizeSchedule(schedule) {
+            let optimized = schedule.map(slot => {
+                if (slot.hour >= 0 && slot.hour < 6) return { ...slot, activity: "💤 Sleep (00:00 - 06:00)" };
+                if (slot.hour >= 9 && slot.hour < 17) return { ...slot, activity: "💼 Work/Study (9+ hrs based on profession)" };
+                if (slot.hour === 7) return { ...slot, activity: "🌅 Breakfast" };
+                if (slot.hour === 12) return { ...slot, activity: "🍽 Lunch" };
+                if (slot.hour === 20) return { ...slot, activity: "🍽 Dinner" };
+                if (slot.hour === 21) return { ...slot, activity: "👨‍👩‍👧‍👦 Family Time (10-15 mins)" };
+                if (slot.hour === 22) return { ...slot, activity: "📱 Social Media (Max 1 hr/day)" };
+                if (slot.hour === 10) return { ...slot, activity: "📖 1 hour Skill Learning" };
+                if (slot.hour === 18) return { ...slot, activity: "🏃 45 mins Exercise" };
+                return slot;
+            });
+            optimized.push({ hour: "Reminder", activity: "🎸 Spend 4+ hrs/week on hobbies!" });
+            return optimized;
+        }
+
+        function displayOptimizedSchedule(optimized) {
+            let displayDiv = document.getElementById("optimized-schedule");
+            displayDiv.innerHTML = "<h3>Recommended Schedule</h3>";
+            optimized.forEach(slot => {
+                let div = document.createElement("div");
+                div.className = "time-slot highlight";
+                div.innerHTML = `<span>${slot.hour}:00</span> <strong>${slot.activity}</strong>`;
+                displayDiv.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>

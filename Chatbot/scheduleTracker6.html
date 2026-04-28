@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 50%; margin: auto; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid black; }
+        select, input { width: 100%; padding: 5px; }
+        button { margin-top: 10px; padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Schedule Tracker</h1>
+        <label for="profession">Select Your Profession:</label>
+        <select id="profession" onchange="updateTimeSlots()">
+            <option value="doctor">Doctor</option>
+            <option value="software_engineer">Software Engineer</option>
+            <option value="artist">Artist</option>
+            <option value="entrepreneur">Entrepreneur</option>
+            <option value="teacher">Teacher</option>
+            <option value="lawyer">Lawyer</option>
+            <option value="athlete">Athlete</option>
+            <option value="scientist">Scientist</option>
+            <option value="govt_employee">Government Employee</option>
+            <option value="freelancer">Freelancer</option>
+            <option value="college_student">College Student</option>
+        </select>
+        
+        <table>
+            <tr><th>Time Slot</th><th>Activity</th></tr>
+            <tbody id="schedule"></tbody>
+        </table>
+        
+        <button onclick="optimizeSchedule()">Optimize Schedule</button>
+        <p id="message">Don't worry! Schedules can be adjusted when needed. 😊</p>
+    </div>
+
+    <script>
+        const schedules = {
+            doctor: ["Sleep", "Plan the day", "Breakfast", "Work", "Exercise", "Hobbies", "Dinner", "Relax"],
+            software_engineer: ["Sleep", "Plan tasks", "Breakfast", "Coding", "Meetings", "Personal Projects", "Exercise", "Hobbies"],
+            artist: ["Sleep", "Sketching", "Brainstorming", "Creative Work", "Commissions", "Marketing", "Experimenting", "Relax"],
+            entrepreneur: ["Sleep", "Brainstorming", "Emails", "Business Development", "Meetings", "Strategy Planning", "Exercise", "Learning"],
+            teacher: ["Sleep", "Lesson Planning", "Teaching", "Grading", "Exercise", "Hobbies", "Family Time", "Relax"],
+            lawyer: ["Sleep", "Legal Research", "Client Meetings", "Case Preparation", "Court Appearances", "Exercise", "Reading", "Relax"],
+            athlete: ["Sleep", "Morning Training", "Nutrition", "Skill Practice", "Strength Training", "Recovery", "Strategy Study", "Relax"],
+            scientist: ["Sleep", "Brainstorming", "Reading", "Lab Experiments", "Data Analysis", "Writing Papers", "Hobbies", "Relax"],
+            govt_employee: ["Sleep", "Work", "Meetings", "Paperwork", "Public Service", "Exercise", "Family Time", "Relax"],
+            freelancer: ["Sleep", "Client Work", "Skill Development", "Networking", "Content Creation", "Exercise", "Personal Projects", "Relax"],
+            college_student: ["Sleep", "Morning Prep", "Classes", "Assignments", "Internships", "Exercise", "Hobbies", "Revision"]
+        };
+
+        function updateTimeSlots() {
+            const profession = document.getElementById("profession").value;
+            const scheduleTable = document.getElementById("schedule");
+            scheduleTable.innerHTML = "";
+            
+            for (let i = 0; i < 8; i++) {
+                let row = `<tr><td>${i * 3}:00 - ${(i + 1) * 3}:00</td><td>
+                            <select>
+                                <option value="">Select Activity</option>`;
+                
+                schedules[profession].forEach(activity => {
+                    row += `<option value="${activity}">${activity}</option>`;
+                });
+                row += `</select></td></tr>`;
+                scheduleTable.innerHTML += row;
+            }
+        }
+
+        function optimizeSchedule() {
+            const profession = document.getElementById("profession").value;
+            const scheduleTable = document.getElementById("schedule");
+            scheduleTable.innerHTML = "";
+            
+            schedules[profession].forEach((activity, index) => {
+                let timeSlot = `${index * 3}:00 - ${(index + 1) * 3}:00`;
+                scheduleTable.innerHTML += `<tr><td>${timeSlot}</td><td>${activity}</td></tr>`;
+            });
+        }
+    </script>
+</body>
+</html>

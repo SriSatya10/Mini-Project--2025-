@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Tracker</title>
+    <link href="st8.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Schedule Tracker</h1>
+        <p>Plan your day efficiently based on your profession</p>
+    </header>
+    <div class="container">
+        <h1>24-Hour Schedule Tracker</h1>
+        <label for="profession">Choose Your Profession:</label>
+        <select id="profession" onchange="generateTimeSlots()">
+            <option value="">Select Profession</option>
+            <option value="doctor">Doctor</option>
+            <option value="engineer">Software Engineer</option>
+            <option value="artist">Artist</option>
+            <option value="entrepreneur">Entrepreneur</option>
+            <option value="teacher">Teacher</option>
+            <option value="lawyer">Lawyer</option>
+            <option value="athlete">Athlete</option>
+            <option value="scientist">Scientist</option>
+            <option value="government">Government Employee</option>
+            <option value="freelancer">Freelancer</option>
+            <option value="student">Student</option>
+        </select>
+        
+        <div class="schedule-container">
+            <div class="column" id="schedule-am">
+                <h2>AM Schedule</h2>
+            </div>
+            <div class="column" id="schedule-pm">
+                <h2>PM Schedule</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const schedules = {
+            
+    doctor: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan the day / Make a to-do list 📝",
+        "08:00": "Breakfast Time 🍽️",
+        "09:00-12:00": "Patient consultations & rounds 🏥",
+        "12:00-13:00": "Lunch & short break 🍽️",
+        "13:00-17:00": "Surgeries, appointments & follow-ups 👨‍⚕️",
+        "18:00": "Exercise / walk 🏃‍♂️",
+        "19:00": "Research / Medical reading 📚",
+        "20:00": "Wrap up pending reports 📝",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Family time / unwind 🏡",
+        "23:00": "Prepare for sleep 🌙"
+    },
+
+    engineer: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan the day / To-do list 📝",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Coding, debugging & problem-solving 👨‍💻",
+        "12:00-13:00": "Lunch & break 🍽️",
+        "13:00-17:00": "Meetings, documentation & project work 🏗️",
+        "18:00": "Quick walk / exercise 🚶‍♂️",
+        "19:00": "Hobbies / gaming 🎮",
+        "20:00": "Personal projects / learning 📚",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Relax, entertainment 🎥",
+        "23:00": "Sleep 🌙"
+    },
+
+    artist: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Morning sketching ✏️",
+        "08:00": "Breakfast & brainstorming ☕",
+        "09:00-12:00": "Creative work (painting, sculpting, designing) 🎭",
+        "12:00-13:00": "Lunch & short break 🍽️",
+        "13:00-17:00": "Working on commissions, projects 🖌️",
+        "18:00": "Exercise / walk 🏃‍♂️",
+        "19:00": "Exploring new art styles 🎨",
+        "20:00": "Marketing & networking 📱",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Experiment with new ideas 🎭",
+        "23:00": "Relax & unwind 🎶"
+    },
+
+    entrepreneur: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan strategy & set goals 📝",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Meetings, business growth & networking 🤝",
+        "12:00-13:00": "Lunch & short break 🍽️",
+        "13:00-17:00": "Product development, decision-making 📊",
+        "18:00": "Exercise / yoga 🏋️",
+        "19:00": "Reading & upskilling 📖",
+        "20:00": "Evaluating business progress 📈",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Relax, spend time with family 🏡",
+        "23:00": "Unwind & sleep 🌙"
+    },
+
+    teacher: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan the lessons / to-do list 📖",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Teaching classes 🎓",
+        "12:00-13:00": "Lunch & short break 🍽️",
+        "13:00-17:00": "Student consultations, grading & lesson planning ✏️",
+        "18:00": "Exercise / walk 🚶‍♂️",
+        "19:00": "Personal learning / research 📖",
+        "20:00": "Reviewing student work 📄",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Family time / relaxation 🎶",
+        "23:00": "Sleep 🌙"
+    },
+
+    lawyer: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan the cases / read updates 📜",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Court sessions, hearings, client meetings 🏛️",
+        "12:00-13:00": "Lunch & break 🍽️",
+        "13:00-17:00": "Legal research, drafting contracts ✍️",
+        "18:00": "Exercise / meditation 🏃‍♂️",
+        "19:00": "Professional networking 🤝",
+        "20:00": "Case preparation for the next day ⚖️",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Relax & unwind 🎥",
+        "23:00": "Sleep 🌙"
+    },
+
+    athlete: {
+        "00:00-06:00": "Sleep 😴",
+        "06:00": "Early morning training 🏋️‍♂️",
+        "08:00": "Breakfast & recovery meal 🍽️",
+        "09:00-12:00": "Practice & conditioning 🏆",
+        "12:00-13:00": "Lunch & rest 🍽️",
+        "13:00-15:00": "Strategy & team discussions ⚽",
+        "15:00-17:00": "Skill drills & game practice 🎯",
+        "18:00": "Gym & endurance training 💪",
+        "19:00": "Relaxation & hobby time 🎵",
+        "20:00": "Dinner & recovery meal 🍽️",
+        "21:00": "Stretching & injury prevention 🏥",
+        "22:00": "Mental training / Visualization 🧘",
+        "23:00": "Sleep 🌙"
+    },
+
+    scientist: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Read research papers 📖",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Lab experiments / analysis 🧪",
+        "12:00-13:00": "Lunch & break 🍽️",
+        "13:00-17:00": "Data collection & report writing 📊",
+        "18:00": "Exercise / walk 🏃‍♂️",
+        "19:00": "Reading & brainstorming new ideas 🧠",
+        "20:00": "Experiment planning 🔬",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Family time / relax 🎵",
+        "23:00": "Sleep 🌙"
+    },
+
+    government : {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan the day's tasks 📋",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Administrative work & meetings 🏢",
+        "12:00-13:00": "Lunch & break 🍽️",
+        "13:00-17:00": "File processing, approvals, & policy work 📜",
+        "18:00": "Exercise 🏃‍♂️",
+        "19:00": "Hobbies / socializing 🎭",
+        "20:00": "Reviewing official documents 🗂️",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Relax & unwind 🎶",
+        "23:00": "Sleep 🌙"
+    },
+
+    freelancer: {
+        "00:00-06:00": "Sleep 😴",
+        "07:00": "Plan projects & schedule 📝",
+        "08:00": "Breakfast 🍽️",
+        "09:00-12:00": "Client work / content creation 🎨",
+        "12:00-13:00": "Lunch & short break 🍽️",
+        "13:00-17:00": "Networking & skill development 📚",
+        "18:00": "Exercise / break 🏃‍♂️",
+        "19:00": "Side projects / passive income work 💼",
+        "20:00": "Content marketing & social media 📱",
+        "21:00": "Dinner 🍽️",
+        "22:00": "Relax & entertainment 🎥",
+        "23:00": "Sleep 🌙"
+    },
+    student: {
+        "00:00-06:30": "Sleep 😴",
+        "07:00": "Morning routine & light exercise ☀️",
+        "08:00": "Breakfast & review notes 🍽️",
+        "09:00-12:00": "Classes / Lectures 📚",
+        "12:00-13:00": "Lunch & short break 🍽️",
+        "13:00-16:00": "More classes / Assignments 🏫",
+        "17:00": "Exercise / Sports 🏃‍♂️",
+        "18:00": "Group study or revision 📖",
+        "19:00": "Hobbies or creative time 🎸",
+        "20:00": "Dinner & relaxation 🍽️",
+        "21:00": "Final review & prep for next day 📝",
+        "22:00": "Entertainment or reading 🎥",
+        "23:00": "Sleep 🌙"
+    }
+};
+        
+        function generateTimeSlots() {
+            let profession = document.getElementById("profession").value;
+            let amColumn = document.getElementById("schedule-am");
+            let pmColumn = document.getElementById("schedule-pm");
+            amColumn.innerHTML = "<h2>AM Schedule</h2>";
+            pmColumn.innerHTML = "<h2>PM Schedule</h2>";
+            
+            if (!schedules[profession]) return;
+            
+            Object.keys(schedules[profession]).forEach(time => {
+                let slotDiv = document.createElement("div");
+                slotDiv.className = "time-slot";
+                slotDiv.innerHTML = `<span>${time}</span> <strong>${schedules[profession][time]}</strong>`;
+                    if (parseInt(time) < 12) {
+                    amColumn.appendChild(slotDiv);
+                } else {
+                    pmColumn.appendChild(slotDiv);
+                }
+            });
+        }
+        
+    </script>
+    <p id="note"></p>
+
+    <script>
+        const note = "📌 *Note: This timetable is designed for weekdays. On weekends, you have more flexibility to engage in personal activities or upskill yourself. While it's not mandatory to follow the schedule exactly, ensure that all important activities are completed—especially sleep and self-care!*";
+        
+        document.getElementById("note").innerText = note;
+    </script>
+    
+    <footer>
+        <p>&copy; 2025 Schedule Tracker | Designed for efficiency</p>
+    </footer>
+</body>
+</html>     

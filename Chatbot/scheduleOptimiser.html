@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Optimizer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .schedule-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .schedule-list li {
+            background: #ddd;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="professionContainer">
+        <h2>Enter Your Profession</h2>
+        <input type="text" id="profession" placeholder="e.g., Software Engineer">
+        <button onclick="nextStep()">Next</button>
+    </div>
+    
+    <div class="container hidden" id="scheduleContainer">
+        <h2>Enter Your Daily Schedule</h2>
+        <input type="text" id="activity" placeholder="Activity">
+        <input type="number" id="duration" placeholder="Duration (hours)">
+        <button onclick="addActivity()">Add</button>
+        <ul class="schedule-list" id="userScheduleList"></ul>
+        <button onclick="optimizeSchedule()">Optimize</button>
+    </div>
+
+    <div class="container hidden" id="optimizedContainer">
+        <h2>Optimized Schedule</h2>
+        <ul class="schedule-list" id="scheduleList"></ul>
+    </div>
+
+    <script>
+        let userProfession = "";
+        let userSchedule = [];
+
+        function nextStep() {
+            userProfession = document.getElementById("profession").value;
+            if (!userProfession) {
+                alert("Please enter your profession");
+                return;
+            }
+            document.getElementById("professionContainer").classList.add("hidden");
+            document.getElementById("scheduleContainer").classList.remove("hidden");
+        }
+
+        function addActivity() {
+            const activity = document.getElementById("activity").value;
+            const duration = parseInt(document.getElementById("duration").value);
+            if (!activity || isNaN(duration) || duration <= 0) {
+                alert("Please enter a valid activity and duration");
+                return;
+            }
+            userSchedule.push({ name: activity, duration, priority: Math.random() * 10 });
+            document.getElementById("userScheduleList").innerHTML += `<li>${activity} - ${duration} hours</li>`;
+            document.getElementById("activity").value = "";
+            document.getElementById("duration").value = "";
+        }
+
+        function optimizeSchedule() {
+            class ScheduleOptimizer {
+                constructor(schedule) {
+                    this.schedule = schedule;
+                }
+                optimize() {
+                    let optimized = [...this.schedule].sort((a, b) => b.priority - a.priority);
+                    return optimized;
+                }
+            }
+            const optimizer = new ScheduleOptimizer(userSchedule);
+            const optimizedSchedule = optimizer.optimize();
+            document.getElementById("scheduleContainer").classList.add("hidden");
+            document.getElementById("optimizedContainer").classList.remove("hidden");
+            const scheduleList = document.getElementById("scheduleList");
+            scheduleList.innerHTML = "";
+            optimizedSchedule.forEach(task => {
+                scheduleList.innerHTML += `<li>${task.name} - ${task.duration} hours</li>`;
+            });
+        }
+    </script>
+</body>
+</html>

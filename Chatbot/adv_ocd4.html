@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCD Analysis</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // JavaScript for live range update and score calculation
+        function updateRangeValue(rangeId, outputId) {
+            const value = document.getElementById(rangeId).value;
+            document.getElementById(outputId).innerText = value;
+        }
+
+        function calculateScore() {
+            let score = 0;
+
+            // Collect range-based scores
+            document.querySelectorAll(".range-input").forEach((range) => {
+                score += parseInt(range.value);
+            });
+
+            // Collect choice-based scores
+            document.querySelectorAll(".choice-input").forEach((select) => {
+                score += parseInt(select.value);
+            });
+
+            // Collect checkbox-based scores
+            document.querySelectorAll(".checkbox-input:checked").forEach((checkbox) => {
+                score += parseInt(checkbox.value);
+            });
+
+            // Display the result
+            document.getElementById("result").innerText = `Your Total Score: ${score}`;
+            document.getElementById("result-section").style.display = "block";
+        }
+    </script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Container Styles */
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Header Styles */
+        header {
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #ff6b8b;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: #ff84a3;
+        }
+
+        /* Form and Question Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .question-section {
+            text-align: left;
+        }
+
+        .question {
+            margin-bottom: 15px;
+            background: #fdf5f9;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: background 0.3s ease-in-out;
+        }
+
+        .question:hover {
+            background: #ffe4ec;
+        }
+
+        .question label {
+            display: block;
+            font-size: 1rem;
+            color: #444444;
+            margin-bottom: 10px;
+        }
+
+        .range-input {
+            width: 100%;
+        }
+
+        .choice-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .checkbox-input {
+            margin-right: 10px;
+        }
+
+        /* Button Styles */
+        .submit-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b8b, #ff9a9e);
+            color: #ffffff;
+            font-size: 1.2rem;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Result Section */
+        .result-section {
+            margin-top: 30px;
+            display: none;
+            background: #ffe4ec;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-section h2 {
+            font-size: 1.5rem;
+            color: #ff6b8b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced OCD Analysis </h1>
+            <p>Please answer the questions below as accurately as possible.</p>
+        </header>
+
+        <form onsubmit="event.preventDefault(); calculateScore();">
+            <div class="question-section">
+                <!-- Rating-Based Questions -->
+                <div class="question">
+                    <label for="q1">1. Over the past week, how often have you experienced overwhelming intrusive thoughts or compulsions that you felt unable to control, even though you were aware of their irrational nature?</label>
+                    <input type="range" id="q1" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q1', 'range-output-q1')">
+                    <span id="range-output-q1">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q5">2. How would you describe the impact of your OCD symptoms on your ability to function in areas like relationships, work, and daily activities?</label>
+                    <input type="range" id="q5" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q5', 'range-output-q5')">
+                    <span id="range-output-q5">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q9">3. How often do you find yourself compelled to repeat actions (such as checking, cleaning, or arranging things) in order to alleviate anxiety or distress, even when you know it's excessive?</label>
+                    <input type="range" id="q9" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q9', 'range-output-q9')">
+                    <span id="range-output-q9">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q12">4. On a scale from 1 to 4, how intense is the emotional exhaustion or frustration you experience due to the persistent presence of OCD symptoms?</label>
+                    <input type="range" id="q12" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q12', 'range-output-q12')">
+                    <span id="range-output-q12">1</span>
+                </div>
+        
+                <div class="question">
+                    <label for="q14">5. How often do your obsessive thoughts cause significant disruptions in your sleep patterns or emotional well-being (such as mood swings or irritability)?</label>
+                    <input type="range" id="q14" class="range-input" min="1" max="4" value="1" oninput="updateRangeValue('q14', 'range-output-q14')">
+                    <span id="range-output-q14">1</span>
+                </div>
+        
+                <!-- Choice-Based Questions -->
+                <div class="question">
+                    <label for="q2">6. When experiencing compulsive behaviors, which of the following best describes how you typically manage or cope with the urge to perform them?</label>
+                    <select id="q2" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I try to distract myself with other activities or thoughts.</option>
+                        <option value="3">I feel an irresistible urge to engage in the compulsive behavior, despite knowing it is unnecessary.</option>
+                        <option value="2">I reach out for support from others in hopes of managing the anxiety.</option>
+                        <option value="1">I attempt to resist the compulsion but usually give in due to the distress it causes.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q3">7. Do you notice certain situations or triggers that tend to worsen or provoke your compulsive behaviors?</label>
+                    <select id="q3" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I often find that specific situations trigger my compulsive behaviors.</option>
+                        <option value="3">Certain situations can sometimes lead to an increase in compulsive behavior.</option>
+                        <option value="2">I rarely experience compulsions in response to particular situations.</option>
+                        <option value="1">I do not experience triggers for my compulsive behaviors.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q6">8. How would you describe your emotional and physical response when attempting to resist compulsive urges or intrusive thoughts?</label>
+                    <select id="q6" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I feel intense distress, anxiety, and a sense of urgency to act.</option>
+                        <option value="3">I experience significant discomfort and anxiety, but I can manage to resist to some extent.</option>
+                        <option value="2">I feel some discomfort, but I am able to manage the urge without much difficulty.</option>
+                        <option value="1">I feel minimal distress and can easily resist the compulsive urges.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q8">9. When faced with intrusive thoughts, how do you typically respond to them?</label>
+                    <select id="q8" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">I engage with them, often analyzing or trying to understand the meaning behind them.</option>
+                        <option value="3">I try to suppress them, but they continue to intrude into my thoughts.</option>
+                        <option value="2">I attempt to ignore them, though they still cause some level of discomfort.</option>
+                        <option value="1">I am able to ignore the intrusive thoughts with little distress or difficulty.</option>
+                    </select>
+                </div>
+        
+                <div class="question">
+                    <label for="q10">10. To what extent do compulsive behaviors interfere with your daily routine, work responsibilities, or social life?</label>
+                    <select id="q10" class="choice-input">
+                        <option value="0" disabled selected>Select an option</option>
+                        <option value="4">Compulsive behaviors significantly disrupt my daily routine, work, and social interactions.</option>
+                        <option value="3">They somewhat interfere with my routine and responsibilities, but I can manage.</option>
+                        <option value="2">They have minimal impact on my day-to-day life.</option>
+                        <option value="1">Compulsive behaviors do not interfere with my routine or responsibilities at all.</option>
+                    </select>
+                </div>
+        
+                <!-- Checkbox-Based Questions -->
+                <div class="question">
+                    <label>11. Which areas of your life do you feel have been most affected by your OCD symptoms? (Please select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Work and career</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Personal relationships (family, friends, etc.)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Daily activities and routines (e.g., hygiene, chores, errands)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Social life and recreational activities</label>
+                    </div>
+                </div>
+        
+                <div class="question">
+                    <label>12. Which coping methods have you used in the past or are currently using to manage your OCD symptoms? (Please select all that apply)</label>
+                    <div>
+                        <label><input type="checkbox" class="checkbox-input" value="4"> Cognitive-behavioral therapy (CBT)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="3"> Medication (e.g., SSRIs, antidepressants)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="2"> Mindfulness or relaxation techniques (e.g., meditation, breathing exercises)</label>
+                        <label><input type="checkbox" class="checkbox-input" value="1"> Self-help books or online resources</label>
+                    </div>
+                </div>
+            </div>
+        
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+        
+        
+
+        <section id="result-section" class="result-section">
+            <h2 id="result"></h2>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCD Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-lime-100 via-purple-200 to-pink-200 h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="w-full max-w-3xl bg-white rounded-lg shadow-xl p-8">
+        <h1 class="text-4xl font-semibold text-center text-purple-500 mb-6">OCD Analysis</h1>
+        
+        <form id="ocdForm" class="space-y-8">
+            <!-- Question 1 (Intensity-based) -->
+            <div class="space-y-4">
+                <label for="question1" class="text-lg font-medium text-gray-700">1. How often do you experience intrusive thoughts that are morally or socially unacceptable?</label>
+                <select id="question1" name="question1" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500">
+                    <option value="0">Select Frequency</option>
+                    <option value="1">Many times a day</option>
+                    <option value="2">A few times in the same day</option>
+                    <option value="3">A few times a week</option>
+                    <option value="4">A few times a month</option>
+                </select>
+            </div>
+
+            <!-- Question 2 (Choice-based) -->
+            <div class="space-y-4">
+                <label for="question2" class="text-lg font-medium text-gray-700">2. When you engage in compulsive behaviors, how do you feel if you try to resist them?</label>
+                <select id="question2" name="question2" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500">
+                    <option value="0">Select an option</option>
+                    <option value="3">I feel anxious but can manage it</option>
+                    <option value="5">I feel intense anxiety and distress</option>
+                    <option value="1">I feel no anxiety at all</option>
+                </select>
+            </div>
+
+            <!-- Question 3 (Choice-based) -->
+            <div class="space-y-4">
+                <label for="question3" class="text-lg font-medium text-gray-700">3. Do you find that your thoughts are rigid, like ‘If I don’t check the door, something terrible will happen’?</label>
+                <select id="question3" name="question3" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500">
+                    <option value="0">Select an option</option>
+                    <option value="3">Yes, I experience this regularly</option>
+                    <option value="2">Occasionally, when stressed</option>
+                    <option value="1">No, I rarely experience this</option>
+                </select>
+            </div>
+
+            <!-- Question 4 (Choice-based) -->
+            <div class="space-y-4">
+                <label for="question4" class="text-lg font-medium text-gray-700">4. How much do your OCD symptoms affect your daily responsibilities (work, relationships, etc.)?</label>
+                <select id="question4" name="question4" class="w-full p-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-purple-500">
+                    <option value="0">Select an option</option>
+                    <option value="4">They significantly interfere</option>
+                    <option value="3">They somewhat interfere</option>
+                    <option value="2">They have minimal impact</option>
+                    <option value="1">They do not interfere at all</option>
+                </select>
+            </div>
+
+            <!-- Question 5 (Rating-based) -->
+            <div class="space-y-4">
+                <label for="question5" class="text-lg font-medium text-gray-700">5. On a scale of 1-10, how emotionally exhausted do you feel because of your OCD symptoms?</label>
+                <input type="range" id="question5" name="question5" min="1" max="10" value="5" class="w-full p-3 rounded-md focus:ring-2 focus:ring-purple-500">
+                <p id="ratingValue" class="text-center text-gray-700 mt-2">5</p>
+            </div>
+
+            <div class="flex justify-center">
+                <button type="button" onclick="calculateScore()" class="bg-purple-400 text-white py-2 px-6 rounded-lg font-semibold hover:bg-purple-500 transition">
+                    Submit
+                </button>
+            </div>
+
+            <div id="result" class="mt-6 text-center text-xl font-semibold"></div>
+        </form>
+    </div>
+
+    <script>
+        // Update the displayed rating value for the scale
+        document.getElementById('question5').addEventListener('input', function() {
+            document.getElementById('ratingValue').textContent = this.value;
+        });
+
+        // Calculate score based on selected answers
+        function calculateScore() {
+            const q1 = parseInt(document.getElementById('question1').value);
+            const q2 = parseInt(document.getElementById('question2').value);
+            const q3 = parseInt(document.getElementById('question3').value);
+            const q4 = parseInt(document.getElementById('question4').value);
+            const q5 = parseInt(document.getElementById('question5').value);
+
+            if (q1 === 0 || q2 === 0 || q3 === 0 || q4 === 0) {
+                alert("Please answer all questions before submitting.");
+                return;
+            }
+
+            const totalScore = q1 + q2 + q3 + q4 + q5;
+            let resultMessage = "Your total score is: " + totalScore + ". ";
+
+            if (totalScore <= 10) {
+                resultMessage += "Your symptoms seem to be relatively mild.";
+            } else if (totalScore <= 20) {
+                resultMessage += "Your symptoms are moderate, and may be impacting your daily life.";
+            } else {
+                resultMessage += "Your symptoms appear to be more severe, and it may be helpful to seek professional support.";
+            }
+
+            document.getElementById('result').textContent = resultMessage;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile | TheraBot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-yellow-100 to-pink-200 min-h-screen flex flex-col">
+
+    <!-- Main Profile Container -->
+    <div class="flex-grow flex items-center justify-center px-4">
+        <div class="bg-white bg-opacity-90 backdrop-blur-lg shadow-xl rounded-2xl p-8 w-full max-w-lg">
+            
+            <!-- Profile Title with Icon -->
+            <div class="text-center mb-6">
+                <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">
+                    User Profile
+                </h1>
+                <p class="text-gray-600 text-sm mt-2">Complete your profile to personalize your experience.</p>
+            </div>
+
+            <!-- User Profile Form -->
+            <form class="space-y-6">
+                <!-- Age Input -->
+                <div>
+                    <label for="age" class="block text-lg font-semibold text-gray-700">Age</label>
+                    <input type="number" id="age" name="age" required placeholder="Enter your age" 
+                        class="mt-2 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none">
+                </div>
+
+                <!-- Gender Dropdown -->
+                <div>
+                    <label for="gender" class="block text-lg font-semibold text-gray-700">Gender</label>
+                    <select id="gender" name="gender" required
+                        class="mt-2 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none">
+                        <option value="" disabled selected>Select your gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- City Input -->
+                <div>
+                    <label for="city" class="block text-lg font-semibold text-gray-700">City</label>
+                    <input type="text" id="city" name="city" required placeholder="Enter your city" 
+                        class="mt-2 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none">
+                </div>
+
+                <!-- Profession Input -->
+                <div>
+                    <label for="profession" class="block text-lg font-semibold text-gray-700">Profession</label>
+                    <input type="text" id="profession" name="profession" required placeholder="Enter your profession" 
+                        class="mt-2 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none">
+                </div>
+
+                <!-- Daily Working Hours Input -->
+                <div>
+                    <label for="working_hours" class="block text-lg font-semibold text-gray-700">Daily Working Hours</label>
+                    <input type="number" id="working_hours" name="working_hours" required placeholder="Enter daily working hours" 
+                        class="mt-2 w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-pink-400 focus:outline-none">
+                </div>
+
+                <!-- Save Profile Button -->
+                <button type="submit" 
+                    class="w-full py-3 mt-4 text-white text-lg font-semibold rounded-lg bg-gradient-to-r from-pink-500 to-purple-500 shadow-md hover:from-pink-600 hover:to-purple-600 transition-transform transform hover:scale-105">
+                    Save Profile
+                </button>
+            </form>
+
+            <!-- Chatbot Button -->
+            <div class="mt-6 text-center">
+                <a href="chatbot3.html">
+                    <button class="w-full py-3 text-white text-lg font-semibold rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 shadow-md hover:from-purple-600 hover:to-blue-600 transition-transform transform hover:scale-105">
+                        Go to Chatbot
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white text-center text-sm text-gray-600 py-3 shadow-inner">
+        <p><span class="font-semibold">Note:</span> Your information is used solely for analysis and remains strictly confidential.</p>
+    </footer>
+
+</body>
+</html>

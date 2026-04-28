@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Tracker</title>
+    <link href="st8.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Schedule Tracker</h1>
+        <p>Plan your day efficiently based on your profession</p>
+    </header>
+    <div class="container">
+        <h1>24-Hour Schedule Tracker</h1>
+        <label for="profession">Choose Your Profession:</label>
+        <select id="profession" onchange="generateTimeSlots()">
+            <option value="">Select Profession</option>
+            <option value="doctor">Doctor</option>
+            <option value="engineer">Software Engineer</option>
+            <option value="artist">Artist</option>
+            <option value="entrepreneur">Entrepreneur</option>
+            <option value="teacher">Teacher</option>
+            <option value="lawyer">Lawyer</option>
+            <option value="athlete">Athlete</option>
+            <option value="scientist">Scientist</option>
+            <option value="government">Government Employee</option>
+            <option value="freelancer">Freelancer</option>
+            <option value="student">Student</option>
+        </select>
+        
+        <div class="schedule-container">
+            <div class="column" id="schedule-am">
+                <h2>AM Schedule</h2>
+            </div>
+            <div class="column" id="schedule-pm">
+                <h2>PM Schedule</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const schedules = {
+            doctor: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            engineer: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Meetings, debugging,  learning 📊,Work Time 🏥", "18:00": "Quick break / walk 🚶‍♂️/Exercise 🏃‍♂️ ", "19:00": " Hobbies or socializing 🎮🎨", "20:00" :" Personal projects or upskilling 📚 ","21:00": "Dinner 🍽️","22:00":" Relax, read, or entertainment 📖 ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            artist: {
+                "00:00-06.00": "Sleep 😴", "07:00": " Morning routine & sketching 📝", "08:00": " Breakfast & idea brainstorming ☕", "09:00-12.00": " Focused creative work 🎨","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Working on commissions or projects 🖌️", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Short break / explore new art styles 🖼️", "20:00" :"Marketing, social media, or networking 📱 ","21:00": "Exercise & dinner 🍽️","22:00":"Experiment with new ideas 🎭 ", "23:00": "Relax , unwind 🎶& Sleepppp.. 🌙"
+            },
+            entreprenuer: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            teacher: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            lawyer: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            athlete: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            scientist: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            government: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            freelancer: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            student: {
+                "00:00-06.00": "Sleep 😴", "07:00": "Plan the day / Make a to-do list📝", "08:00": "Breakfast Time...  🍽️", "09:00-12.00": "Work Time 🏥","12.00-13:00": "Lunch & short break 🍽️","13:00-17:00":"Work Time 🏥", "18:00": "Exercise 🏃‍♂️ (or) Go for a brisk walk", "19:00": " Time for you Hobbies 🎸", "20:00" :"Complete Pending Tasks ","21:00": "Dinner 🍽️","22:00":"Spend time with Family/Relax for a bit ", "23:00": "Unwind and Prepare for Sleeep 🌙"
+            },
+            
+        };
+        
+        function generateTimeSlots() {
+            let profession = document.getElementById("profession").value;
+            let amColumn = document.getElementById("schedule-am");
+            let pmColumn = document.getElementById("schedule-pm");
+            amColumn.innerHTML = "<h2>AM Schedule</h2>";
+            pmColumn.innerHTML = "<h2>PM Schedule</h2>";
+            
+            if (!schedules[profession]) return;
+            
+            Object.keys(schedules[profession]).forEach(time => {
+                let slotDiv = document.createElement("div");
+                slotDiv.className = "time-slot";
+                slotDiv.innerHTML = `<span>${time}</span> <strong>${schedules[profession][time]}</strong>`;
+                    if (parseInt(time) < 12) {
+                    amColumn.appendChild(slotDiv);
+                } else {
+                    pmColumn.appendChild(slotDiv);
+                }
+            });
+        }
+    </script>
+    <footer>
+        <p>&copy; 2025 Schedule Tracker | Designed for efficiency</p>
+    </footer>
+</body>
+</html>     
