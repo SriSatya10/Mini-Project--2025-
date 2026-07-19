@@ -11,6 +11,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
+// Serve static frontend files (HTML, CSS, JS) from the root directory
+// This allows a single-platform deployment (like Render) to host both backend and frontend
+app.use(express.static(require('path').join(__dirname, '..')));
+
 // ========================
 // USER ROUTES
 // ========================
