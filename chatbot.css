@@ -103,6 +103,16 @@ footer {
     margin-top: 20px;
 }
 
+/* Header alignment */
+header {
+    text-align: center;
+    width: 100%;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
 /* Navigation alignment */
 nav {
     text-align: center;
@@ -119,12 +129,18 @@ nav ul li {
     margin: 0 10px;
 }
 
-nav ul li a {
+nav ul li a, nav ul li button {
     text-decoration: none;
     color: #ff00ff;
     font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
 }
 
-nav ul li a:hover {
+nav ul li a:hover, nav ul li button:hover {
     color: #00eaff;
 }
